@@ -20,13 +20,15 @@ class Persistence:
                     "id": users.id, 
                     "email" : users.email, 
                     "password" : users.password, 
-                    "address" : users.address
+                    "address" : users.address,
+                    "role": users.role
                 } if isinstance(users, Customer) 
                 else {
                     "name" : users.name, 
                     "id": users.id, 
                     "email" : users.email, 
-                    "password" : users.password
+                    "password" : users.password,
+                    "role": users.role
                 } 
                 for users in store.users_list
             ],
@@ -36,7 +38,7 @@ class Persistence:
                     "customer_id" : orders.customer.id, 
                     "items" : [ 
                         {"item_id" : item.id, "product_id" : item.product.id, "quantity" : item.quantity} 
-                        for item in orders.order_items_list
+                         for item in orders.order_items_list
                     ]
                 } 
                 for orders in store.orders_list 
@@ -60,7 +62,7 @@ class Persistence:
             store.products_list.append(product)
 
         for users_data in (data["users_list"]):
-            if users_data.role == "Customer":
+            if users_data["role"] == "Customer":
                 customer = Customer(
                     name = (users_data['name']),
                     id = (users_data['id']),
@@ -69,7 +71,7 @@ class Persistence:
                     address = (users_data['address']),
                 )
                 store.users_list.append(customer)
-            else: 
+            elif users_data["role"] == "Administrator": 
                 administrator = Administrator(
                     name = (users_data['name']),
                     id = (users_data['id']),
