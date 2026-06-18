@@ -1,0 +1,68 @@
+{
+    "name": "Vortex",
+    "products_list": [
+        {
+            "id": "1",
+            "name": "Automation with n8n",
+            "stock": 78,
+            "price": 4500000
+        },
+        {
+            "id": "2",
+            "name": "USB Memory",
+            "stock": 107,
+            "price": 100000
+        },
+        {
+            "id": "3",
+            "name": "Iphone 13",
+            "stock": 9,
+            "price": 3000000
+        }
+    ],
+    "users_list": [
+        {
+            "name": "Juan Diego",
+            "id": "1035975741",
+            "email": "ramirezrendonjuandiego@gmail.com",
+            "password": "J1d2r3r4",
+            "address": "Calle 38#58 B79"
+        },
+        {
+            "name": "Natalia",
+            "id": "1040571701",
+            "email": "natys5424@gmail.com",
+            "password": "N1r2r3"
+        }
+    ],
+    "orders_list": [
+        {
+            "id": "1",
+            "customer_id": "1035975741",
+            "items": [
+                {
+                    "item_id": "1",
+                    "product_id": "1",
+                    "quantity": 2
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "customer_id": "1035975741",
+            "items": [
+                {
+                    "item_id": "2",
+                    "product_id": "2",
+                    "quantity": 43
+                },
+                {
+                    "item_id": "3",
+                    "product_id": "3",
+                    "quantity": 1
+                }
+            ]
+        }
+    ],
+    "save_date": "2026-06-18T11:21:50.159235"
+}
