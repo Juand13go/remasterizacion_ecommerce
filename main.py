@@ -4,7 +4,7 @@ from product import Product
 from store import Store
 from user import Customer, Administrator
 from order import Order
-from exceptions import CanNotFindProductError, CanNotFindUserError, CanNotFindOrderError
+from exceptions import  CanNotFindUserError, CanNotFindOrderError
 
 # 1. Main system initialization (Store)
 vortex = Store("Vortex")

@@ -13,36 +13,9 @@ class Persistence:
     def save_file(self, store: Store):
         data = {
             "name" : store.name,
-            "products_list" : [products.__dict__ for products in store.products_list],
-            "users_list" : [
-                {
-                    "name" : users.name,
-                    "id": users.id, 
-                    "email" : users.email, 
-                    "password" : users.password, 
-                    "address" : users.address,
-                    "role": users.role
-                } if isinstance(users, Customer) 
-                else {
-                    "name" : users.name, 
-                    "id": users.id, 
-                    "email" : users.email, 
-                    "password" : users.password,
-                    "role": users.role
-                } 
-                for users in store.users_list
-            ],
-            "orders_list" : [ 
-                {
-                    "id" : orders.id, 
-                    "customer_id" : orders.customer.id, 
-                    "items" : [ 
-                        {"item_id" : item.id, "product_id" : item.product.id, "quantity" : item.quantity} 
-                         for item in orders.order_items_list
-                    ]
-                } 
-                for orders in store.orders_list 
-            ],
+            "products_list" : [products.to_dict() for products in store.products_list],
+            "users_list" : [users.to_dict() for users in store.users_list],
+            "orders_list" : [orders.to_dict() for orders in store.orders_list],
             "save_date" : datetime.now().isoformat(),
         }
         with open(self.file,"w",encoding="utf-8") as f:
@@ -92,7 +65,7 @@ class Persistence:
                     product = store.find_product_by_id(items['product_id']),
                     quantity = items['quantity']
                 )
-                order.add_order_item(order_items_list)
+                order.order_items_list.append(order_items_list)
 
             store.create_order(order)
         return store

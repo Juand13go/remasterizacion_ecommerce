@@ -5,10 +5,10 @@ class User:
         self.email = email
         self.password = password
 
-    def __eq__(self, user_comparison):
-        if not isinstance(user_comparison, User):
+    def __eq__(self, other):
+        if not isinstance(other, User):
             return NotImplemented
-        return self.id == user_comparison.id 
+        return self.id == other.id 
 
     def __hash__(self):
         return hash(self.id)
@@ -16,11 +16,25 @@ class User:
     def __str__(self):
         return f"Username: {self.name}, ID: {self.id}"
 
+    def to_dict(self):
+         return {
+            "name" : self.name,
+            "id": self.id, 
+            "email" : self.email, 
+            "password" : self.password, 
+        }
+
 class Customer(User): 
     def __init__(self, name, id, email, password, address):
         super().__init__(name, id, email, password)
         self.address = address
         self.order_history = []
+
+    def to_dict(self):
+        data = super().to_dict()
+        data["address"] = self.address
+        data["role"] = self.role
+        return data
 
     def add_order_history(self, order):
         if order not in self.order_history:
@@ -51,3 +65,8 @@ class Administrator(User):
     @property
     def role(self):
         return "Administrator"
+
+    def to_dict(self):
+        data = super().to_dict()
+        data["role"] = self.role
+        return data

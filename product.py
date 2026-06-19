@@ -5,13 +5,21 @@ class Product:
         self.stock = stock
         self.price = price
 
-    def __eq__(self, product_comparison):
-        if not isinstance(product_comparison, Product):
+    def __eq__(self, other):
+        if not isinstance(other, Product):
             return NotImplemented
-        return self.id == product_comparison.id 
+        return self.id == other.id 
 
     def __hash__(self):
         return hash(self.id)
+
+    def to_dict(self):
+        return {
+            "id" : self.id, 
+            "name" : self.name,
+            "stock" : self.stock,
+            "price" : self.price
+        }
 
     @property
     def is_available(self) -> bool:

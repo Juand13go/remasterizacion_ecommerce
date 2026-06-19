@@ -6,6 +6,13 @@ class OrderItem:
         self.product = product
         self.quantity = quantity
 
+    def to_dict(self):
+        return{
+            "item_id" : self.id,
+            "product_id" : self.product.id,
+            "quantity" : self.quantity
+        }
+
     @property
     def product_cost(self) -> float:
         return self.product.price * self.quantity

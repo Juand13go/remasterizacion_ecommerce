@@ -8,13 +8,20 @@ class Order:
         self.customer = customer
         self.order_items_list = []
 
-    def __eq__(self, order_comparison):
-        if not isinstance(order_comparison, Order):
+    def __eq__(self, other):
+        if not isinstance(other, Order):
             return NotImplemented
-        return self.id == order_comparison.id 
+        return self.id == other.id 
 
     def __hash__(self):
         return hash(self.id)
+
+    def to_dict(self):
+        return {
+            "id" : self.id,
+            "customer_id" : self.customer.id,
+            "items" : [item.to_dict() for item in self.order_items_list]
+        }
 
     def add_order_item(self, order_item: OrderItem):
         if order_item not in self.order_items_list:
